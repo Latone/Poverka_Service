@@ -11,13 +11,17 @@ namespace Poverka_Service
     {
         /// <summary>
         /// Главная точка входа для приложения.
+        /// 
+        /// ADMIN RIGHTS REQUIRED::
+        /// to install service:: installutil Poverka_Service.exe
+        /// to delete service:: installutil.exe /u Poverka_Service.exe
         /// </summary>
-        static void Main()
+        static void Main(string[] args)
         {
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Poverka_TCP_Listener()
+                new Poverka_TCP_Listener(args)
             };
             ServiceBase.Run(ServicesToRun);
         }
