@@ -11,10 +11,6 @@ namespace Poverka_Service
     {
         /// <summary>
         /// Главная точка входа для приложения.
-        /// 
-        /// ADMIN RIGHTS REQUIRED::
-        /// to install service(bin/debug):: installutil Poverka_Service.exe
-        /// to delete service(bin/debug):: installutil.exe /u Poverka_Service.exe
         /// </summary>
         static void Main(string[] args)
         {

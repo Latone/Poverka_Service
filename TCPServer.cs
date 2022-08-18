@@ -26,7 +26,6 @@ namespace Poverka_Service
         public TCPServer(int port,string pathToSave) {
             try
             {
-                
                 m_server = new TcpListener(port);
                 TCPSocketListener.DEFAULT_FILE_STORE_LOC = pathToSave;
                 if (!Directory.Exists(TCPSocketListener.DEFAULT_FILE_STORE_LOC))

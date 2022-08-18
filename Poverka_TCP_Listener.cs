@@ -21,7 +21,7 @@ namespace Poverka_Service
         {
             InitializeComponent();
 
-            string eventSourceName = "MySource";
+           /* string eventSourceName = "MySource";
             string logName = "MyNewLog";
 
             if (args.Length > 0)
@@ -43,12 +43,12 @@ namespace Poverka_Service
             }
 
             eventLog1.Source = "MySource";
-            eventLog1.Log = "MyNewLog";
+            eventLog1.Log = "MyNewLog";*/
         }
 
         protected override void OnStart(string[] args)
         {
-            eventLog1.WriteEntry("Something onstart");
+           // eventLog1.WriteEntry("Something onstart");
             if (args.Length > 0)
             {
                 //eventSourceName = args[0];
@@ -75,7 +75,7 @@ namespace Poverka_Service
             server.StopServer();
             server = null;
 
-            eventLog1.WriteEntry("In OnStop.");
+          //  eventLog1.WriteEntry("In OnStop.");
         }
     }
 }
