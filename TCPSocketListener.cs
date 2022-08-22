@@ -65,7 +65,11 @@ namespace Poverka_Service
             {
                 try
                 {
+                    byteBuffer = new Byte[1024];
                     size = m_clientSocket.Receive(byteBuffer);
+                    if (size == 0)
+                        throw new ArgumentException("Нет данных, закрытие соединения...");
+
                     m_currentReceiveDateTime = DateTime.Now;
                     ParseReceiveBuffer(byteBuffer, size);
                 }
@@ -73,6 +77,13 @@ namespace Poverka_Service
                 {
                     m_stopClient = true;
                     m_markedForDeletion = true;
+                    Console.WriteLine("Закрыто на время ожидания: " + se.Message);
+                }
+                catch (Exception e) // уведомление об исключении, сгенерированном в предыдущей попытке, потому что нет передачи данных
+                {
+                    m_stopClient = true;
+                    m_markedForDeletion = true;
+                    Console.WriteLine(e.Message);
                 }
             }
             t.Change(Timeout.Infinite, Timeout.Infinite);
@@ -141,6 +152,10 @@ namespace Poverka_Service
                     {
                         try
                         {
+                            if (File.Exists(DEFAULT_FILE_STORE_LOC + oneLine.Substring(0, length - 2)))
+                            {
+                                File.Delete(DEFAULT_FILE_STORE_LOC + oneLine.Substring(0, length - 2));
+                            }
                             m_cfgFile = new StreamWriter(DEFAULT_FILE_STORE_LOC + oneLine.Substring(0, length - 2));
                         }
                         catch (Exception e)
